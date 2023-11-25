@@ -1,6 +1,8 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MahApps.Metro.Controls.Dialogs;
+using Prism.Common;
 using Prism.Ioc;
 using Prism.Regions;
 using Prismetro.App.Wpf.Contracts;
@@ -11,6 +13,8 @@ namespace Prismetro.App.Wpf.Services;
 
 public class DialogServiceAdapter : IDialogServiceAdapter
 {
+    public const string CancellationKey = "CANCELLATION";
+    
     private readonly IDialogCoordinator _coordinator;
     private readonly ShellWindowResolver _shellResolver;
     private readonly IContainerProvider _container;
@@ -27,10 +31,10 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     
     public void ShowDialog(string region, NavigationParameters? parameters)
     {
-        ShowDialogAsync(region, parameters).ConfigureAwait(false);
+        ShowDialogAsync(region, parameters, CancellationToken.None).ConfigureAwait(false);
     }
 
-    private async Task ShowDialogAsync(string region, NavigationParameters? parameters)
+    public async Task ShowDialogAsync(string region, NavigationParameters? parameters, CancellationToken ctk = default)
     {
         if (_shellResolver.Window is null) 
             throw new InvalidOperationException("Shell Window should be resolve");
@@ -46,7 +50,14 @@ public class DialogServiceAdapter : IDialogServiceAdapter
             _shellResolver.Window.DataContext, 
             view
         );
+
+        AppendDefaultParameters(parameters ??= new NavigationParameters(), ctk);
         
         viewModel.NavigateTo(region, parameters, view.RegionManagerScope);
+    }
+
+    private static void AppendDefaultParameters(IParameters parameters, CancellationToken ctk)
+    {
+        parameters.Add(CancellationKey, ctk);
     }
 }
