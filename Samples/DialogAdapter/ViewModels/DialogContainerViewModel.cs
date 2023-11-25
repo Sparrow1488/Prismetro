@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
@@ -5,6 +6,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prismetro.App.Wpf.Contracts;
 using Prismetro.App.Wpf.Services;
 using Prismetro.App.Wpf.Views;
 
@@ -17,6 +19,7 @@ public class DialogContainerViewModel : BindableBase
     private DelegateCommand? _closeCommand;
     private CancellationToken _cancellation;
     private CancellationTokenRegistration _cancelRegistration;
+    private DialogScope _scope = null!;
 
     public DialogContainerViewModel(
         IDialogCoordinator coordinator,
@@ -45,18 +48,25 @@ public class DialogContainerViewModel : BindableBase
     
     public void NavigateTo(string region, NavigationParameters? parameter, IRegionManager scopeManager)
     {
-        parameter?.TryGetValue(DialogServiceAdapter.CancellationKey, out _cancellation);
+        parameter?.TryGetValue(DParams.CancellationKey, out _cancellation);
+        parameter?.TryGetValue(DParams.DialogScopeKey, out _scope);
 
         if (_cancellation.IsCancellationRequested) 
-            Cancel();
+            Close();
         
-        _cancelRegistration = _cancellation.Register(Cancel);
+        RegisterRequestsHandler();
         
         var navigation = scopeManager.Regions[Regions.DialogContainerRegion].NavigationService;
         navigation.RequestNavigate(region, parameter);
     }
 
-    private void Cancel()
+    private void RegisterRequestsHandler()
+    {
+        _cancelRegistration = _cancellation.Register(Close);
+        _scope.CloseMessages.Subscribe(_ => Close());
+    }
+
+    private void Close()
     {
         if (CloseCommand.CanExecute(new object()))
             CloseCommand.Execute(new object());

@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
+using Prismetro.App.Wpf.Commands;
 using Prismetro.App.Wpf.Contracts;
 
 namespace Prismetro.App.Wpf.ViewModels;
@@ -14,13 +15,14 @@ public class MainWindowViewModel
     public MainWindowViewModel(IDialogServiceAdapter dialogService)
     {
         _dialogService = dialogService;
+        NavigateCommand = new AsyncDelegateCommand(Navigate);
     }
+    
+    public ICommand NavigateCommand { get; }
 
-    public ICommand Navigate => _navigate ??= new DelegateCommand(() =>
+    private Task Navigate()
     {
-        var source = new CancellationTokenSource();
-        _dialogService.ShowDialogAsync(Regions.LoginRegion, null, source.Token);
-
-        Task.Delay(2500).ContinueWith(_ => source.Cancel()); // Auto close after delayed
-    });
+        using var source = new CancellationTokenSource();
+        return _dialogService.ShowDialogAsync(Regions.LoginRegion, null, source.Token);
+    }
 }
