@@ -9,7 +9,8 @@ namespace Prismetro.App.Wpf.ViewModels;
 
 public abstract class ValidationViewModel : BindableBase, IDataErrorInfo
 {
-    private readonly Dictionary<string, (Func<object?> ValueSelector, ValidationRule Rule)> _validators = new();
+    private Dictionary<string, (Func<object?> ValueSelector, ValidationRule Rule)>? _validators;
+    private Dictionary<string, (Func<object?> ValueSelector, ValidationRule Rule)> Validators => _validators ??= new();
 
     public string Error => string.Empty;
 
@@ -17,7 +18,7 @@ public abstract class ValidationViewModel : BindableBase, IDataErrorInfo
     {
         get
         {
-            if (!_validators.TryGetValue(columnName, out var tuple)) return string.Empty;
+            if (!Validators.TryGetValue(columnName, out var tuple)) return string.Empty;
             
             var result = tuple.Rule.Validate(tuple.ValueSelector.Invoke(), CultureInfo.CurrentCulture);
             return result.ErrorContent?.ToString() ?? string.Empty;
@@ -26,6 +27,6 @@ public abstract class ValidationViewModel : BindableBase, IDataErrorInfo
 
     protected void AddValidator(string property, Func<object?> valueSelector, ValidationRule rule)
     {
-        _validators.Add(property, (valueSelector, rule));
+        Validators.Add(property, (valueSelector, rule));
     }
 }
