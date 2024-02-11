@@ -10,7 +10,6 @@ namespace Prismetro.App.Wpf.ViewModels;
 public class MainWindowViewModel
 {
     private readonly IDialogServiceAdapter _dialogService;
-    private DelegateCommand? _navigate;
 
     public MainWindowViewModel(IDialogServiceAdapter dialogService)
     {

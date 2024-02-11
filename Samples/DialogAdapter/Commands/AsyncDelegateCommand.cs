@@ -27,9 +27,9 @@ public class AsyncDelegateCommand : ICommand
         return _canExecuteMethod.Invoke();
     }
 
-    public void Execute(object? parameter)
+    public async void Execute(object? parameter)
     {
-        _executeMethod.Invoke();
+        await _executeMethod.Invoke();
     }
 }
 
@@ -54,8 +54,8 @@ public class AsyncDelegateCommand<T> : ICommand
         return _canExecuteMethod.Invoke((T) parameter!);
     }
 
-    public void Execute(object? parameter)
+    public async void Execute(object? parameter)
     {
-        _executeMethod.Invoke((T) parameter!);
+        await _executeMethod.Invoke((T) parameter!);
     }
 }

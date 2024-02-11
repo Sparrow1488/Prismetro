@@ -23,7 +23,19 @@ public class DialogScope
     }
     
     public Guid Id { get; }
-    public IObservable<object?> CloseMessages => _subject;
+    public IObservable<object?> Close => _subject;
 
     public void RequestClose() => _subject.OnNext(new object());
+}
+
+public class DialogScope<TResult> : DialogScope
+{
+    public DialogScope(Guid id) : base(id)
+    {
+    }
+
+    public Task<TResult?> WaitForResultAsync()
+    {
+        return Task.FromResult((TResult) default);
+    }
 }

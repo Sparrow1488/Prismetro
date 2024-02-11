@@ -4,7 +4,14 @@
     <projectFile>Prismetro.App.Wpf.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="54af6293-3e68-40c1-bddd-dfd25e3a9f6e" name="Changes" comment="" />
+    <list default="true" id="54af6293-3e68-40c1-bddd-dfd25e3a9f6e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.DialogAdapter.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DialogAdapter.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Commands/AsyncDelegateCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Commands/AsyncDelegateCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Contracts/IDialogServiceAdapter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/IDialogServiceAdapter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/DialogContainerViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/DialogContainerViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/LoginViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/LoginViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +21,10 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3965636461bfb8d650893177bcc539addb11a176a9acc0a7f56c09b0b4e0ae/DispatcherOperation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5eb5afd342c82db026c6155a911419b36dcd8b8b5c284371b2cd9b3d78c824c1/WaitHandle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ac32f819d6853e0a6eda168c52b7f38eef9ae75936fb85d96a15c39d115245/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c17c71b99fd283b69b3ef1472475e17d5bd798c732412b03ad37037b44b185/ThreadPoolWorkQueue.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c4244f5e23cf35ede91b533595a56367baabe737f76dfe6c73f9ccfc6ed943/DelegateCommand{T}.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7db1970b4b4f513baacfddb3d33541806414701a93d4b8897925380179c9b/DialogManager.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -27,22 +37,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\ilyao\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\ilyao\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\ilyao\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\ilyao\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\ilyao\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\ilyao\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Prismetro.App.Wpf" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -72,7 +82,10 @@
       <option name="presentableId" value="Default" />
       <updated>1700910599722</updated>
       <workItem from="1700910603247" duration="31000" />
-      <workItem from="1700930582229" duration="4268000" />
+      <workItem from="1700930582229" duration="4802000" />
+      <workItem from="1703268795267" duration="72000" />
+      <workItem from="1703268890369" duration="18000" />
+      <workItem from="1707664313363" duration="621000" />
     </task>
     <servers />
   </component>
@@ -85,18 +98,18 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Commands/AsyncDelegateCommand.cs</url>
-          <line>31</line>
-          <properties documentPath="C:\Users\ilyao\OneDrive\Desktop\Development\Projects\Prismetro\Samples\DialogAdapter\Commands\AsyncDelegateCommand.cs" initialLine="29" containingFunctionPresentation="method 'Execute'">
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/ViewModels/DialogContainerViewModel.cs</url>
+          <line>54</line>
+          <properties documentPath="C:\Users\ilyao\OneDrive\Desktop\Development\Projects\Prismetro\Samples\DialogAdapter\ViewModels\DialogContainerViewModel.cs" initialLine="54" containingFunctionPresentation="method 'NavigateTo'">
             <startOffsets>
-              <option value="797" />
+              <option value="1674" />
             </startOffsets>
             <endOffsets>
-              <option value="821" />
+              <option value="1682" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

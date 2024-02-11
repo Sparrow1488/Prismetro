@@ -33,11 +33,11 @@ public class DialogContainerViewModel : BindableBase
     {
         var shell = _shellResolver.Window!;
 
-        shell.Dispatcher.Invoke(() =>
+        shell.Dispatcher.Invoke(async () =>
         {
             var dialog = shell.FindChild<DialogContainerView>();
 
-            _coordinator.HideMetroDialogAsync(
+            await _coordinator.HideMetroDialogAsync(
                 shell.DataContext,
                 dialog
             );
@@ -63,7 +63,7 @@ public class DialogContainerViewModel : BindableBase
     private void RegisterRequestsHandler()
     {
         _cancelRegistration = _cancellation.Register(Close);
-        _scope.CloseMessages.Subscribe(_ => Close());
+        _scope.Close.Subscribe(_ => Close());
     }
 
     private void Close()
