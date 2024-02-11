@@ -1,12 +1,14 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Prism.Ioc;
 using Prismetro.App.Wpf.Commands;
 using Prismetro.App.Wpf.Models;
 using Prismetro.Core.Contracts;
 
 namespace Prismetro.App.Wpf.ViewModels;
+
+// ReSharper disable file MemberCanBePrivate.Global
+// ReSharper disable file UnusedAutoPropertyAccessor.Global
 
 public class MainWindowViewModel
 {
@@ -25,6 +27,8 @@ public class MainWindowViewModel
         using var scope = await _dialogService.ShowDialogAsync(new GreetingNavigate("Sparrow"));
 
         var result = await scope.WaitForResultAsync();
-        MessageBox.Show(result);
+        
+        if (!string.IsNullOrWhiteSpace(result))
+            MessageBox.Show(result);
     }
 }

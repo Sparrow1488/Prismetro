@@ -1,5 +1,4 @@
 using Prism.Regions;
-using Prismetro.Core;
 using Prismetro.Core.Models.Navigation;
 
 namespace Prismetro.App.Wpf.Models;

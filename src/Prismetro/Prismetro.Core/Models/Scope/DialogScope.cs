@@ -14,11 +14,15 @@ public class DialogScope : IDisposable
 
     public Guid Id { get; }
     public IObservable<object?> Close => _closePublisher;
+    protected bool Disposed { get; set; }
 
     public void RequestClose() => _closePublisher.OnNext(new object());
 
     public virtual void Dispose()
     {
+        if (Disposed) return;
+        
         _closePublisher.Dispose();
+        Disposed = true;
     }
 }

@@ -1,12 +1,8 @@
 ﻿using System.Windows;
-using MahApps.Metro.Controls.Dialogs;
 using Prism.Ioc;
 using Prismetro.App.Wpf.ViewModels;
 using Prismetro.App.Wpf.Views;
-using Prismetro.Core;
-using Prismetro.Core.Contracts;
 using Prismetro.Core.Extensions;
-using Prismetro.Core.Services;
 
 namespace Prismetro.App.Wpf;
 

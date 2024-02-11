@@ -16,7 +16,7 @@ public class AsyncDelegateCommand : ICommand
     {
     }
 
-    public AsyncDelegateCommand(Func<Task> executeMethod, Func<bool> canExecuteMethod)
+    private AsyncDelegateCommand(Func<Task> executeMethod, Func<bool> canExecuteMethod)
     {
         _executeMethod = executeMethod;
         _canExecuteMethod = canExecuteMethod;

@@ -29,22 +29,7 @@ public sealed class DialogContainerViewModel : BindableBase
         _shellResolver = shellResolver;
     }
 
-    public ICommand CloseCommand => _closeCommand ??= new DelegateCommand(() =>
-    {
-        RequireDestroyed();
-        
-        var shell = _shellResolver.Window!;
-
-        shell.Dispatcher.Invoke(async () =>
-        {
-            var dialog = shell.FindChild<DialogContainerView>();
-
-            await _coordinator.HideMetroDialogAsync(
-                shell.DataContext,
-                dialog
-            );
-        });
-    });
+    public ICommand CloseCommand => _closeCommand ??= new DelegateCommand(() => _scope.RequestClose());
     
     public void NavigateTo(string region, NavigationParameters? parameter, IRegionManager scopeManager)
     {
@@ -63,19 +48,29 @@ public sealed class DialogContainerViewModel : BindableBase
     {
         _closeSub = _scope.Close.Subscribe(_ =>
         {
-            if (Close())
+            if (OnScopeClose())
                 Destroy();
         });
     }
 
-    private bool Close()
+    private bool OnScopeClose()
     {
-        var canExecute = CloseCommand.CanExecute(new object());
+        RequireDestroyed();
         
-        if (canExecute)
-            CloseCommand.Execute(new object());
+        var shell = _shellResolver.Window!;
 
-        return canExecute;
+        shell.Dispatcher.Invoke(async () =>
+        {
+            var dialog = shell.FindChild<DialogContainerView>();
+
+            await _coordinator.HideMetroDialogAsync(
+                shell.DataContext,
+                dialog
+            );
+        });
+
+        // TODO: update when validators
+        return true;
     }
 
     /// <summary>
