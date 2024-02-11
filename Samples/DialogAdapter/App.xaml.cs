@@ -12,7 +12,7 @@ public partial class App
 {
     protected override void RegisterTypes(IContainerRegistry registry)
     {
-        registry.RegisterForNavigation<LoginView, LoginViewModel>(Regions.LoginRegion);
+        registry.RegisterForNavigation<GreetingView, GreetingViewModel>(Regions.GreetingRegion);
         
         registry.RegisterSingleton<IDialogCoordinator, DialogCoordinator>();
         registry.RegisterSingleton<IDialogServiceAdapter, DialogServiceAdapter>();

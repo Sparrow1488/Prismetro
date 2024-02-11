@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Prism.Commands;
+using Prism.Regions;
 using Prismetro.App.Wpf.Commands;
 using Prismetro.App.Wpf.Contracts;
 
@@ -22,6 +23,9 @@ public class MainWindowViewModel
     private Task Navigate()
     {
         using var source = new CancellationTokenSource();
-        return _dialogService.ShowDialogAsync(Regions.LoginRegion, null);
+        return _dialogService.ShowDialogAsync(Regions.GreetingRegion, new NavigationParameters
+        {
+            { "Name", "Sparrow" }
+        });
     }
 }
