@@ -22,7 +22,7 @@ public class MainWindowViewModel
 
     private async Task NavigateAsync()
     {
-        var scope = await _dialogService.ShowDialogAsync(new GreetingNavigate("Sparrow"));
+        using var scope = await _dialogService.ShowDialogAsync(new GreetingNavigate("Sparrow"));
 
         var result = await scope.WaitForResultAsync();
         MessageBox.Show(result);

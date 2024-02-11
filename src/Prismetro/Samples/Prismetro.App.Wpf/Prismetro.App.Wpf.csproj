@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Prismetro.Core\Prismetro.Core.csproj" />
-      <ProjectReference Include="..\Prismetro.Core\Prismetro.Core.csproj" />
     </ItemGroup>
 
 </Project>
