@@ -1,31 +1,52 @@
-using System.Threading.Tasks;
-using Prism.Mvvm;
+using System.ComponentModel;
+using System.Windows.Input;
+using Prism.Commands;
 using Prism.Regions;
+using Prismetro.App.Wpf.Validation;
 using Prismetro.Core.Contracts;
 using Prismetro.Core.Extensions;
 using Prismetro.Core.Models.Scope;
 
 namespace Prismetro.App.Wpf.ViewModels;
 
-public sealed class GreetingViewModel : BindableBase, INavigationDialogAware<string>
+public sealed class GreetingViewModel : ValidationViewModel, INavigationDialogAware<string>
 {
     private string? _name;
     private DialogScope<string> _scope = null!;
+    private ICommand? _send;
+    private string? _sendText;
+
+    public GreetingViewModel()
+    {
+        AddValidator(nameof(Text), () => Text, new SendValidationRule());
+    }
 
     public string? Name
     {
         get => _name;
         set => SetProperty(ref _name, value);
     }
-    
-    public async void OnNavigatedTo(NavigationContext context)
+
+    public string? Text
+    {
+        get => _sendText;
+        set => SetProperty(ref _sendText, value);
+    }
+
+    public ICommand SendCommand => _send ??= new DelegateCommand<string>(
+            OnSend,
+            _ => this[nameof(Text)] == string.Empty
+        ).ObservesProperty(() => Text);
+
+    public void OnNavigatedTo(NavigationContext context)
     {
         _scope = this.GetScope(context);
         Name = context.Parameters["Name"].ToString();
-
-        await Task.Delay(3000);
-        
+    }
+    
+    private void OnSend(string text)
+    {
         if (!_scope.Completed)
-            _scope.PushAndCloseResult($"Hello, {Name}!");
+            _scope.PushAndCloseResult(Text!);
     }
 }
