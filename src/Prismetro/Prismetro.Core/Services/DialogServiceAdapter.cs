@@ -1,8 +1,13 @@
+using System.Windows;
+using System.Windows.Media;
+using ControlzEx.Theming;
+using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Prism.Common;
 using Prism.Ioc;
 using Prism.Regions;
 using Prismetro.Core.Contracts;
+using Prismetro.Core.Exceptions;
 using Prismetro.Core.Extensions;
 using Prismetro.Core.Models.Navigation;
 using Prismetro.Core.Models.Scope;
@@ -16,7 +21,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     private readonly IDialogCoordinator _coordinator;
     private readonly ShellWindowResolver _shellResolver;
     private readonly IContainerProvider _container;
-    private readonly List<DialogScope> _dialogs = new();
+    private readonly List<DialogScope> _dialogs = new(); // TODO: очищать после Dispose/Close
 
     public DialogServiceAdapter(
         IDialogCoordinator coordinator, 
@@ -28,17 +33,39 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         _container = container;
     }
 
-    public async Task<DialogScope<TResult>> ShowDialogAsync<TResult>(Navigate<TResult> navigate)
+    private static DialogView<DialogContainerView> DefaultDialogView => new();
+
+    public Task<DialogScope<TResult>> ShowDialogAsync<TResult>(Navigate<TResult> navigate)
     {
-        return (DialogScope<TResult>) await ShowDialogCoreAsync(navigate.Page, navigate.Parameters, CreateDialogScope<TResult>);
+        return ShowDialogAsync(navigate, DefaultDialogView);
+    }
+
+    public async Task<DialogScope<TResult>> ShowDialogAsync<TResult, TContainer>(
+        Navigate<TResult> navigate, 
+        DialogView<TContainer> view
+    ) where TContainer : IDialogContainerCoreSupport
+    {
+        return (DialogScope<TResult>) await ShowDialogCoreAsync(navigate, CreateDialogScope<TResult>, view);
     }
 
     public Task<DialogScope> ShowDialogAsync(Navigate navigate)
     {
-        return ShowDialogCoreAsync(navigate.Page, navigate.Parameters, CreateDialogScope);
+        return ShowDialogAsync(navigate, DefaultDialogView);
     }
 
-    private async Task<DialogScope> ShowDialogCoreAsync(string page, NavigationParameters? parameters, Func<DialogScope> scopeCreation)
+    public Task<DialogScope> ShowDialogAsync<TContainer>(
+        Navigate navigate, 
+        DialogView<TContainer> view
+    ) where TContainer : IDialogContainerCoreSupport
+    {
+        return ShowDialogCoreAsync(navigate, CreateDialogScope, view);
+    }
+
+    private async Task<DialogScope> ShowDialogCoreAsync<TContainer>(
+        Navigate navigate, 
+        Func<DialogScope> scopeCreation, 
+        DialogView<TContainer> dialogView
+    ) where TContainer : IDialogContainerCoreSupport
     {
         if (_shellResolver.Window is null) 
             throw new InvalidOperationException("Shell Window should be resolve");
@@ -46,20 +73,30 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         using var containerScope = _container.CreateScope();
         
         var viewModel = containerScope.Resolve<DialogContainerViewModel>();
-        var view = containerScope.Resolve<DialogContainerView>();
+        var view = containerScope.Resolve<TContainer>();
 
-        view.DataContext = viewModel;
+        if (view is FrameworkElement element and BaseMetroDialog dialog)
+        {
+            element.DataContext = viewModel;
+            
+            ApplyDialogView((MetroWindow) _shellResolver.Window!, dialogView.WindowDarkModeOverlayBrush);
         
-        await _coordinator.ShowMetroDialogAsync(
-            _shellResolver.Window.DataContext, 
-            view
-        );
+            await _coordinator.ShowMetroDialogAsync(
+                _shellResolver.Window.DataContext, 
+                dialog
+            );
+        }
+        else
+        {
+            throw new DialogContainerException($"Passed {nameof(DialogView<TContainer>)} is not assignable to {nameof(IDialogContainerCoreSupport)} and {nameof(BaseMetroDialog)}");
+        }
 
         var scope = scopeCreation.Invoke();
+        var parameters = navigate.Parameters ?? new NavigationParameters();
         
-        AppendDefaultParameters(parameters ??= new NavigationParameters(), scope);
+        AppendDefaultParameters(parameters, scope);
         
-        viewModel.NavigateTo(page, parameters, view.Core.RegionManagerScope);
+        viewModel.NavigateTo(navigate.Page, parameters, view.Core.RegionManagerScope);
 
         return scope;
     }
@@ -79,5 +116,14 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     {
         _dialogs.Add(scope);
         return scope;
+    }
+    
+    private static void ApplyDialogView(MetroWindow window, Brush? darkModeOverlay)
+    {
+        var currentTheme = ThemeManager.Current.DetectTheme();
+        if (darkModeOverlay != null && (currentTheme?.Name.Contains("Dark") ?? false))
+        {
+            window.OverlayBrush = darkModeOverlay;
+        }
     }
 }

@@ -5,9 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:regions="http://prismlibrary.com/"
-    xmlns:views="clr-namespace:Prismetro.Core.Views"
-    xmlns:wpf="clr-namespace:Prismetro.Core"
     d:DesignHeight="300"
     d:DesignWidth="300"
     mc:Ignorable="d">
