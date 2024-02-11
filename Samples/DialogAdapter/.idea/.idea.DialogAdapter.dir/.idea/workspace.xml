@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="54af6293-3e68-40c1-bddd-dfd25e3a9f6e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Extensions/NavigationExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/Scope/DialogScope.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Models/Scope/DialogScope`1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.DialogAdapter.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.DialogAdapter.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Commands/AsyncDelegateCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Commands/AsyncDelegateCommand.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Contracts/IDialogServiceAdapter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/IDialogServiceAdapter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Contracts/INavigationDialogAware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/INavigationDialogAware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/DParams.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/DParams.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/DialogServiceAdapter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/DialogServiceAdapter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/DialogContainerViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/DialogContainerViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/LoginViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/LoginViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MainWindowViewModel.cs" afterDir="false" />
@@ -20,11 +25,15 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3965636461bfb8d650893177bcc539addb11a176a9acc0a7f56c09b0b4e0ae/DispatcherOperation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5eb5afd342c82db026c6155a911419b36dcd8b8b5c284371b2cd9b3d78c824c1/WaitHandle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6b5ac1a5b5e3b7395a1ca3ebd5be568ef58f1963049cf13e9b7cc6b5f3a38/NavigationContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/9ac32f819d6853e0a6eda168c52b7f38eef9ae75936fb85d96a15c39d115245/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c17c71b99fd283b69b3ef1472475e17d5bd798c732412b03ad37037b44b185/ThreadPoolWorkQueue.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c4244f5e23cf35ede91b533595a56367baabe737f76dfe6c73f9ccfc6ed943/DelegateCommand{T}.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cf126e3878dc49c6ed1d2915caaef337c5684280204b4e6c7863339bf6669/INavigationAware.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e7db1970b4b4f513baacfddb3d33541806414701a93d4b8897925380179c9b/DialogManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ea6f4d42ec94e7c38e628482873e8b3c8d3a9bd9e76466a7e855c3bf37096bc/INavigateAsync.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f635f0871f709d225869f727e2313a81a14c121b23a81b9ebe4a11afb3f8519/NavigationAsyncExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -85,7 +94,7 @@
       <workItem from="1700930582229" duration="4802000" />
       <workItem from="1703268795267" duration="72000" />
       <workItem from="1703268890369" duration="18000" />
-      <workItem from="1707664313363" duration="621000" />
+      <workItem from="1707664313363" duration="2667000" />
     </task>
     <servers />
   </component>
@@ -94,24 +103,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/ViewModels/DialogContainerViewModel.cs</url>
-          <line>54</line>
-          <properties documentPath="C:\Users\ilyao\OneDrive\Desktop\Development\Projects\Prismetro\Samples\DialogAdapter\ViewModels\DialogContainerViewModel.cs" initialLine="54" containingFunctionPresentation="method 'NavigateTo'">
-            <startOffsets>
-              <option value="1674" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1682" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

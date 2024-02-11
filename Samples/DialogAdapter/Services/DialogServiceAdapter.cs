@@ -7,6 +7,8 @@ using Prism.Common;
 using Prism.Ioc;
 using Prism.Regions;
 using Prismetro.App.Wpf.Contracts;
+using Prismetro.App.Wpf.Extensions;
+using Prismetro.App.Wpf.Models.Scope;
 using Prismetro.App.Wpf.ViewModels;
 using Prismetro.App.Wpf.Views;
 
@@ -29,12 +31,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         _container = container;
     }
     
-    public void ShowDialog(string region, NavigationParameters? parameters)
-    {
-        ShowDialogAsync(region, parameters, CancellationToken.None).ConfigureAwait(false);
-    }
-
-    public async Task<DialogScope> ShowDialogAsync(string region, NavigationParameters? parameters, CancellationToken ctk = default)
+    public async Task<DialogScope> ShowDialogAsync(string page, NavigationParameters? parameters)
     {
         if (_shellResolver.Window is null) 
             throw new InvalidOperationException("Shell Window should be resolve");
@@ -53,17 +50,16 @@ public class DialogServiceAdapter : IDialogServiceAdapter
 
         var scope = ProvideDialog();
         
-        AppendDefaultParameters(parameters ??= new NavigationParameters(), scope, ctk);
+        AppendDefaultParameters(parameters ??= new NavigationParameters(), scope);
         
-        viewModel.NavigateTo(region, parameters, view.RegionManagerScope);
+        viewModel.NavigateTo(page, parameters, view.RegionManagerScope);
 
         return scope;
     }
 
-    private static void AppendDefaultParameters(IParameters parameters, DialogScope scope, CancellationToken ctk)
+    private static void AppendDefaultParameters(IParameters parameters, DialogScope scope)
     {
-        parameters.Add(DParams.DialogScopeKey, scope);
-        parameters.Add(DParams.CancellationKey, ctk);
+        parameters.SetScope(scope);
     }
 
     private DialogScope ProvideDialog()

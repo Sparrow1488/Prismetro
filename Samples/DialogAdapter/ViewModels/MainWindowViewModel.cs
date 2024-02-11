@@ -22,6 +22,6 @@ public class MainWindowViewModel
     private Task Navigate()
     {
         using var source = new CancellationTokenSource();
-        return _dialogService.ShowDialogAsync(Regions.LoginRegion, null, source.Token);
+        return _dialogService.ShowDialogAsync(Regions.LoginRegion, null);
     }
 }

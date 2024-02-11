@@ -7,6 +7,8 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prismetro.App.Wpf.Contracts;
+using Prismetro.App.Wpf.Extensions;
+using Prismetro.App.Wpf.Models.Scope;
 using Prismetro.App.Wpf.Services;
 using Prismetro.App.Wpf.Views;
 
@@ -17,8 +19,6 @@ public class DialogContainerViewModel : BindableBase
     private readonly IDialogCoordinator _coordinator;
     private readonly ShellWindowResolver _shellResolver;
     private DelegateCommand? _closeCommand;
-    private CancellationToken _cancellation;
-    private CancellationTokenRegistration _cancelRegistration;
     private DialogScope _scope = null!;
 
     public DialogContainerViewModel(
@@ -42,18 +42,13 @@ public class DialogContainerViewModel : BindableBase
                 dialog
             );
         });
-        
-        _cancelRegistration.Dispose();
     });
     
     public void NavigateTo(string region, NavigationParameters? parameter, IRegionManager scopeManager)
     {
-        parameter?.TryGetValue(DParams.CancellationKey, out _cancellation);
-        parameter?.TryGetValue(DParams.DialogScopeKey, out _scope);
+        _scope = parameter?.GetScope() 
+                 ?? throw new ArgumentException("DialogScope not passed into parameters. Parameters " + parameter);
 
-        if (_cancellation.IsCancellationRequested) 
-            Close();
-        
         RegisterRequestsHandler();
         
         var navigation = scopeManager.Regions[Regions.DialogContainerRegion].NavigationService;
@@ -62,7 +57,6 @@ public class DialogContainerViewModel : BindableBase
 
     private void RegisterRequestsHandler()
     {
-        _cancelRegistration = _cancellation.Register(Close);
         _scope.Close.Subscribe(_ => Close());
     }
 
