@@ -11,6 +11,11 @@ public partial class TitledDialogContainerView
         InitializeComponent();
         CoreViewer.Content = Core = new DialogContainerCore(regionManager);
     }
-
+    
     public override IDialogContainerCore Core { get; }
+
+    public void SetTitle(string title)
+    {
+        TitleBlock.Text = title;
+    }
 }

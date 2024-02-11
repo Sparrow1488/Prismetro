@@ -10,5 +10,6 @@ namespace Prismetro.Core.Models.Navigation;
 public record DialogView<TContainer>
     where TContainer : IDialogContainerCoreSupport
 {
-    public Brush? WindowDarkModeOverlayBrush { get; set; } = new SolidColorBrush(Colors.Black);
+    public Action<TContainer>? OnShow { get; protected set; }
+    public Brush? WindowDarkModeOverlayBrush { get; } = new SolidColorBrush(Colors.Black);
 }

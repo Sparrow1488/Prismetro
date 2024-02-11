@@ -85,6 +85,8 @@ public class DialogServiceAdapter : IDialogServiceAdapter
                 _shellResolver.Window.DataContext, 
                 dialog
             );
+            
+            dialogView.OnShow?.Invoke(view);
         }
         else
         {

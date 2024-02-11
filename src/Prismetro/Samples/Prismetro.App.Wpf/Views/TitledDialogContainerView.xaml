@@ -6,13 +6,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=System.Runtime"
     xmlns:views="clr-namespace:Prismetro.Core.Views;assembly=Prismetro.Core"
+    MinWidth="500"
     d:DesignHeight="300"
-    d:DesignWidth="300"
     mc:Ignorable="d">
     <StackPanel>
         <Grid>
             <Grid.Resources>
                 <system:Double x:Key="TextSize">16</system:Double>
+                <system:Double x:Key="CloseTextSize">14</system:Double>
             </Grid.Resources>
 
             <Grid.ColumnDefinitions>
@@ -21,9 +22,10 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock
+                x:Name="TitleBlock"
                 Grid.Column="0"
-                FontSize="{StaticResource TextSize}"
-                Text="{Binding Title}" />
+                VerticalAlignment="Center"
+                FontSize="{StaticResource TextSize}" />
 
             <Button
                 Grid.Column="1"
@@ -31,11 +33,11 @@
                 HorizontalAlignment="Right"
                 Command="{Binding CloseCommand}"
                 Content="Close"
-                FontSize="{StaticResource TextSize}" />
+                FontSize="{StaticResource CloseTextSize}" />
         </Grid>
 
         <StackPanel>
-            <ContentControl x:Name="CoreViewer" />
+            <ContentControl x:Name="CoreViewer" Margin="0,15" />
         </StackPanel>
     </StackPanel>
 </views:DialogContainer>

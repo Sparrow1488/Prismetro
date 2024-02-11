@@ -26,7 +26,7 @@ public class MainWindowViewModel
     {
         using var scope = await _dialogService.ShowDialogAsync(
             new GreetingNavigate("Sparrow"), 
-            new TitledDialogView()
+            new TitledDialogView("Greeting dialog")
         );
 
         var result = await scope.WaitForResultAsync();
