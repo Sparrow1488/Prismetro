@@ -1,6 +1,5 @@
 using Prism.Common;
 using Prism.Regions;
-using Prismetro.App.Wpf.Contracts;
 using Prismetro.App.Wpf.Models.Scope;
 using Prismetro.App.Wpf.Services;
 

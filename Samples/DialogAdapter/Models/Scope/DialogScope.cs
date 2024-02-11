@@ -3,18 +3,23 @@ using System.Reactive.Subjects;
 
 namespace Prismetro.App.Wpf.Models.Scope;
 
-public class DialogScope
+public class DialogScope : IDisposable
 {
-    private readonly Subject<object?> _subject;
+    private readonly Subject<object?> _closePublisher;
 
     public DialogScope(Guid id)
     {
         Id = id;
-        _subject = new Subject<object?>();
+        _closePublisher = new Subject<object?>();
     }
 
     public Guid Id { get; }
-    public IObservable<object?> Close => _subject;
+    public IObservable<object?> Close => _closePublisher;
 
-    public void RequestClose() => _subject.OnNext(new object());
+    public void RequestClose() => _closePublisher.OnNext(new object());
+
+    public virtual void Dispose()
+    {
+        _closePublisher.Dispose();
+    }
 }

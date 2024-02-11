@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using MahApps.Metro.Controls.Dialogs;
 using Prism.Common;
@@ -8,6 +7,7 @@ using Prism.Ioc;
 using Prism.Regions;
 using Prismetro.App.Wpf.Contracts;
 using Prismetro.App.Wpf.Extensions;
+using Prismetro.App.Wpf.Models.Navigation;
 using Prismetro.App.Wpf.Models.Scope;
 using Prismetro.App.Wpf.ViewModels;
 using Prismetro.App.Wpf.Views;
@@ -30,8 +30,18 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         _shellResolver = shellResolver;
         _container = container;
     }
-    
-    public async Task<DialogScope> ShowDialogAsync(string page, NavigationParameters? parameters)
+
+    public async Task<DialogScope<TResult>> ShowDialogAsync<TResult>(Navigate<TResult> navigate)
+    {
+        return (DialogScope<TResult>) await ShowDialogCoreAsync(navigate.Page, navigate.Parameters, CreateDialogScope<TResult>);
+    }
+
+    public Task<DialogScope> ShowDialogAsync(Navigate navigate)
+    {
+        return ShowDialogCoreAsync(navigate.Page, navigate.Parameters, CreateDialogScope);
+    }
+
+    private async Task<DialogScope> ShowDialogCoreAsync(string page, NavigationParameters? parameters, Func<DialogScope> scopeCreation)
     {
         if (_shellResolver.Window is null) 
             throw new InvalidOperationException("Shell Window should be resolve");
@@ -48,7 +58,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
             view
         );
 
-        var scope = ProvideDialog();
+        var scope = scopeCreation.Invoke();
         
         AppendDefaultParameters(parameters ??= new NavigationParameters(), scope);
         
@@ -61,12 +71,16 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     {
         parameters.SetScope(scope);
     }
+    
+    private DialogScope<TResult> CreateDialogScope<TResult>() 
+        => (DialogScope<TResult>) RegisterDialogScope(new DialogScope<TResult>(Guid.NewGuid()));
 
-    private DialogScope ProvideDialog()
+    private DialogScope CreateDialogScope() 
+        => RegisterDialogScope(new DialogScope(Guid.NewGuid()));
+
+    private DialogScope RegisterDialogScope(DialogScope scope)
     {
-        var dialog = new DialogScope(Guid.NewGuid());
-        _dialogs.Add(dialog);
-        
-        return dialog;
+        _dialogs.Add(scope);
+        return scope;
     }
 }

@@ -1,12 +1,10 @@
 using System;
-using System.Threading;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-using Prismetro.App.Wpf.Contracts;
 using Prismetro.App.Wpf.Extensions;
 using Prismetro.App.Wpf.Models.Scope;
 using Prismetro.App.Wpf.Services;
