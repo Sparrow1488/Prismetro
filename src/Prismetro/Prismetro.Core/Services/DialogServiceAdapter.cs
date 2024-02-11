@@ -59,7 +59,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         
         AppendDefaultParameters(parameters ??= new NavigationParameters(), scope);
         
-        viewModel.NavigateTo(page, parameters, view.RegionManagerScope);
+        viewModel.NavigateTo(page, parameters, view.Core.RegionManagerScope);
 
         return scope;
     }

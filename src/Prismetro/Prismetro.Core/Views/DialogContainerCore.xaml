@@ -1,0 +1,14 @@
+<UserControl
+    x:Class="Prismetro.Core.Views.DialogContainerCore"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Prismetro.Core.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:regions="http://prismlibrary.com/"
+    xmlns:wpf="clr-namespace:Prismetro.Core"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <ContentControl x:Name="RegionContentControl" regions:RegionManager.RegionName="{x:Static wpf:PrismetroRegions.DialogContainerRegion}" />
+</UserControl>

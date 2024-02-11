@@ -2,7 +2,7 @@
 ## TODO
 
 - [ ] Сворачивание окон (`Freezing`) (без очистки вью моделей и с возможностью отслеживать результат)
-
+- [ ] Модификация `DialogContainerView` (Добавить `DialogContainerCore`)
 
 ## Startup
 
