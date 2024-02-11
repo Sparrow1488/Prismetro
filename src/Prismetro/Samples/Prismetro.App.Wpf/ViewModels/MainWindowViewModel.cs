@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Prism.Ioc;
 using Prismetro.App.Wpf.Commands;
 using Prismetro.App.Wpf.Models;
 using Prismetro.Core.Contracts;
