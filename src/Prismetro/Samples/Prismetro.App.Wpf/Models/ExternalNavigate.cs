@@ -5,7 +5,4 @@ namespace Prismetro.App.Wpf.Models;
 
 public record GreetingNavigate(
     string Name 
-) : Navigate<string>(Regions.GreetingRegion, new NavigationParameters
-{
-    { "Name", Name }
-});
+) : Navigate<string>(Regions.GreetingRegion, new NavigationParameters($"Name={Name}"));

@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -12,7 +13,8 @@ using Prismetro.Core.Views;
 
 namespace Prismetro.Core.ViewModels;
 
-public sealed class DialogContainerViewModel : BindableBase
+public sealed class DialogContainerViewModel<TContainer> : BindableBase
+    where TContainer : DialogContainer
 {
     private readonly IDialogCoordinator _coordinator;
     private readonly ShellWindowResolver _shellResolver;
@@ -61,7 +63,7 @@ public sealed class DialogContainerViewModel : BindableBase
 
         shell.Dispatcher.Invoke(async () =>
         {
-            var dialog = shell.FindChild<DialogContainerView>();
+            var dialog = shell.FindChild<TContainer>();
 
             await _coordinator.HideMetroDialogAsync(
                 shell.DataContext,

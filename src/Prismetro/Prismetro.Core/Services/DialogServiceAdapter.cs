@@ -43,7 +43,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     public async Task<DialogScope<TResult>> ShowDialogAsync<TResult, TContainer>(
         Navigate<TResult> navigate, 
         DialogView<TContainer> view
-    ) where TContainer : IDialogContainerCoreSupport
+    ) where TContainer : DialogContainer
     {
         return (DialogScope<TResult>) await ShowDialogCoreAsync(navigate, CreateDialogScope<TResult>, view);
     }
@@ -56,7 +56,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     public Task<DialogScope> ShowDialogAsync<TContainer>(
         Navigate navigate, 
         DialogView<TContainer> view
-    ) where TContainer : IDialogContainerCoreSupport
+    ) where TContainer : DialogContainer
     {
         return ShowDialogCoreAsync(navigate, CreateDialogScope, view);
     }
@@ -65,14 +65,14 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         Navigate navigate, 
         Func<DialogScope> scopeCreation, 
         DialogView<TContainer> dialogView
-    ) where TContainer : IDialogContainerCoreSupport
+    ) where TContainer : DialogContainer
     {
         if (_shellResolver.Window is null) 
             throw new InvalidOperationException("Shell Window should be resolve");
 
         using var containerScope = _container.CreateScope();
-        
-        var viewModel = containerScope.Resolve<DialogContainerViewModel>();
+
+        var viewModel = containerScope.Resolve<DialogContainerViewModel<TContainer>>();
         var view = containerScope.Resolve<TContainer>();
 
         if (view is FrameworkElement element and BaseMetroDialog dialog)

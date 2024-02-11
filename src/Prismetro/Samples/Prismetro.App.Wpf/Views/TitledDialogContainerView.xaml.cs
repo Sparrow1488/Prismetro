@@ -1,11 +1,12 @@
 using Prism.Regions;
 using Prismetro.Core.Contracts;
+using Prismetro.Core.Views;
 
-namespace Prismetro.Core.Views;
+namespace Prismetro.App.Wpf.Views;
 
-public partial class DialogContainerView
+public partial class TitledDialogContainerView
 {
-    public DialogContainerView(IRegionManager regionManager)
+    public TitledDialogContainerView(IRegionManager regionManager)
     {
         InitializeComponent();
         CoreViewer.Content = Core = new DialogContainerCore(regionManager);
