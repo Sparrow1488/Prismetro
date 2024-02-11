@@ -31,7 +31,7 @@ public class DialogScope<TResult> : DialogScope
     
     public void PushAndCloseResult(TResult result)
     {
-        _pushResult?.Invoke(result);
+        PushResult(result);
         RequestClose();
     }
 

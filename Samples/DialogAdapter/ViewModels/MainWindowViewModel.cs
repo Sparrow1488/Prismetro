@@ -22,8 +22,7 @@ public class MainWindowViewModel
 
     private async Task NavigateAsync()
     {
-        using var source = new CancellationTokenSource();
-        using var scope = await _dialogService.ShowDialogAsync(new GreetingNavigate("Sparrow"));
+        var scope = await _dialogService.ShowDialogAsync(new GreetingNavigate("Sparrow"));
 
         var result = await scope.WaitForResultAsync();
         MessageBox.Show(result);
