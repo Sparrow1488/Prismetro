@@ -1,3 +1,4 @@
+using System.Windows.Controls;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Regions;
@@ -14,11 +15,6 @@ public sealed class GreetingViewModel : ValidationViewModel, INavigationDialogAw
     private DialogScope<string> _scope = null!;
     private ICommand? _send;
     private string? _sendText;
-
-    public GreetingViewModel()
-    {
-        AddValidator(nameof(Text), () => Text, new SendValidationRule());
-    }
 
     public string? Name
     {
@@ -40,7 +36,10 @@ public sealed class GreetingViewModel : ValidationViewModel, INavigationDialogAw
     public void OnNavigatedTo(NavigationContext context)
     {
         _scope = this.GetScope(context);
-        Name = context.Parameters["Name"].ToString();
+        
+        Name = context.Parameters[NavigateKeys.Greeting.Name].ToString();
+        if (context.Parameters.TryGetValue<ValidationRule>(NavigateKeys.Greeting.TextValidation, out var validator))
+            AddValidator(nameof(Text), () => Text, validator);
     }
     
     private void OnSend(string text)

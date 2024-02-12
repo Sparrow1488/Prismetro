@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using Prismetro.App.Wpf.Commands;
 using Prismetro.App.Wpf.Models;
+using Prismetro.App.Wpf.Validation;
 using Prismetro.Core.Contracts;
 
 namespace Prismetro.App.Wpf.ViewModels;
@@ -25,7 +26,7 @@ public class MainWindowViewModel
     private async Task NavigateAsync()
     {
         using var scope = await _dialogService.ShowDialogAsync(
-            new GreetingNavigate("Sparrow"), 
+            new GreetingNavigate("Sparrow", new SendValidationRule()), 
             new TitledDialogView("Greeting dialog")
         );
 
