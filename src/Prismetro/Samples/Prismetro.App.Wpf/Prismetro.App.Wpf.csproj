@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Prismetro.Core\Prismetro.Core.csproj" />
+      <ProjectReference Include="..\..\Prismetro.Module.Keyboards\Prismetro.Module.Keyboards.csproj" />
     </ItemGroup>
 
 </Project>

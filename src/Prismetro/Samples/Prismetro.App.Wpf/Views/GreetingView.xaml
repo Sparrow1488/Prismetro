@@ -6,8 +6,7 @@
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:validation="clr-namespace:Prismetro.App.Wpf.Validation"
-    d:DesignHeight="300"
-    d:DesignWidth="300"
+    xmlns:views="clr-namespace:Prismetro.Module.Keyboards.Views;assembly=Prismetro.Module.Keyboards"
     mc:Ignorable="d">
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -32,6 +31,10 @@
                     Command="{Binding SendCommand}"
                     CommandParameter="{Binding ElementName=SendTextBox, Path=Text}"
                     Content="Send" />
+            </StackPanel>
+
+            <StackPanel>
+                <views:TestKeyboard SubmitCommand="{Binding SendCommand}" Value="{Binding Text, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
         </StackPanel>
     </Grid>

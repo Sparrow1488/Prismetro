@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prismetro.App.Wpf", "Sample
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{D54346EF-C07E-4DD0-A1CE-61643320F055}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prismetro.Module.Keyboards", "Prismetro.Module.Keyboards\Prismetro.Module.Keyboards.csproj", "{52305611-6353-441F-A645-9D3BF7BC2011}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{9AFF5792-9AB8-467F-9CF9-DB0360BA756E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AFF5792-9AB8-467F-9CF9-DB0360BA756E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AFF5792-9AB8-467F-9CF9-DB0360BA756E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52305611-6353-441F-A645-9D3BF7BC2011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52305611-6353-441F-A645-9D3BF7BC2011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52305611-6353-441F-A645-9D3BF7BC2011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52305611-6353-441F-A645-9D3BF7BC2011}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9AFF5792-9AB8-467F-9CF9-DB0360BA756E} = {D54346EF-C07E-4DD0-A1CE-61643320F055}
