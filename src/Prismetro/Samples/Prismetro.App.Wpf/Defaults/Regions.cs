@@ -1,4 +1,4 @@
-namespace Prismetro.App.Wpf;
+namespace Prismetro.App.Wpf.Defaults;
 
 internal static class Regions
 {

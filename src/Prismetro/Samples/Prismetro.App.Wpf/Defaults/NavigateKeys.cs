@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Prismetro.App.Wpf;
+namespace Prismetro.App.Wpf.Defaults;
 
 public static class NavigateKeys
 {

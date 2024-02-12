@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using Prism.Ioc;
+using Prismetro.App.Wpf.Defaults;
 using Prismetro.App.Wpf.ViewModels;
 using Prismetro.App.Wpf.Views;
 using Prismetro.Core.Extensions;

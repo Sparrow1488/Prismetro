@@ -85,7 +85,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
             ApplyDialogView((MetroWindow) _shellResolver.Window!, dialogView.WindowDarkModeOverlayBrush);
         
             await _coordinator.ShowMetroDialogAsync(
-                _shellResolver.Window.DataContext, 
+                _shellResolver.Window.DataContext,
                 dialog
             );
             
