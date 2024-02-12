@@ -11,6 +11,6 @@ namespace Prismetro.Core.Models.Navigation;
 public record DialogView<TContainer>
     where TContainer : IDialogContainerCoreSupport
 {
-    public Action<TContainer, DialogScope>? OnShow { get; protected set; }
+    public Action<TContainer, DialogScope>? OnShow { get; protected init; }
     public Brush? WindowDarkModeOverlayBrush { get; } = new SolidColorBrush(Colors.Black);
 }

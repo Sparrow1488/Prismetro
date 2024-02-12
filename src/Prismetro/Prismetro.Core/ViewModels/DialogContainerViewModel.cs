@@ -68,6 +68,9 @@ public sealed class DialogContainerViewModel<TContainer> : BindableBase
                 shell.DataContext,
                 dialog
             );
+            
+            if (dialog is IDisposable disposableDialog)
+                disposableDialog.Dispose();
         });
 
         // TODO: update when validators

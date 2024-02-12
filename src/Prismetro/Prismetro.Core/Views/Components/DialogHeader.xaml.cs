@@ -24,6 +24,11 @@ public partial class DialogHeader
 
         DataContext = this;
     }
+    
+    public DialogHeader()
+    {
+        InitializeComponent();
+    }
 
     public ICommand? CloseCommand
     {
@@ -41,10 +46,5 @@ public partial class DialogHeader
     {
         Dispatcher.Invoke(() => CloseButton = action.Invoke(CloseButton));
         return this;
-    }
-    
-    public DialogHeader()
-    {
-        InitializeComponent();
     }
 }
