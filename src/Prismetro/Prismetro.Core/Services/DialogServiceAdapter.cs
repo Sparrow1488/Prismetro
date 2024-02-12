@@ -73,32 +73,25 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         using var containerScope = _container.CreateScope();
 
         var viewModel = containerScope.Resolve<DialogContainerViewModel<TContainer>>();
-        var view = containerScope.Resolve<TContainer>();
+        var container = containerScope.Resolve<TContainer>();
         
         var scope = scopeCreation.Invoke();
         var parameters = navigate.Parameters ?? new NavigationParameters();
 
-        if (view is FrameworkElement element and BaseMetroDialog dialog)
-        {
-            element.DataContext = viewModel;
-            
-            ApplyDialogView((MetroWindow) _shellResolver.Window!, dialogView.WindowDarkModeOverlayBrush);
+        container.DataContext = viewModel;
         
-            await _coordinator.ShowMetroDialogAsync(
-                _shellResolver.Window.DataContext,
-                dialog
-            );
-            
-            dialogView.OnShow?.Invoke(view, scope);
-        }
-        else
-        {
-            throw new DialogContainerException($"Passed {nameof(DialogView<TContainer>)} is not assignable to {nameof(IDialogContainerCoreSupport)} and {nameof(BaseMetroDialog)}");
-        }
+        ApplyDialogView((MetroWindow) _shellResolver.Window!, dialogView.WindowDarkModeOverlayBrush);
+    
+        await _coordinator.ShowMetroDialogAsync(
+            _shellResolver.Window.DataContext,
+            container
+        );
+        
+        dialogView.OnShow?.Invoke(container, scope);
 
         AppendDefaultParameters(parameters, scope);
         
-        viewModel.NavigateTo(navigate.Page, parameters, view.Core.RegionManagerScope);
+        viewModel.NavigateTo(navigate.Page, parameters, container.Core.RegionManagerScope);
 
         return scope;
     }

@@ -8,7 +8,7 @@ namespace Prismetro.Core.Models.Navigation;
 /// Настройки отображения диалогового окна
 /// </summary>
 /// <typeparam name="TContainer">Тип используемого контейнера</typeparam>
-public record DialogView<TContainer>
+public record DialogView<TContainer> // TODO: Dispose!!!
     where TContainer : IDialogContainerCoreSupport
 {
     public Action<TContainer, DialogScope>? OnShow { get; protected init; }

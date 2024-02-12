@@ -5,6 +5,7 @@ using Prismetro.App.Wpf.Commands;
 using Prismetro.App.Wpf.Models;
 using Prismetro.App.Wpf.Validation;
 using Prismetro.Core.Contracts;
+using Prismetro.Core.Extensions;
 
 namespace Prismetro.App.Wpf.ViewModels;
 
@@ -23,7 +24,17 @@ public class MainWindowViewModel
     
     public ICommand NavigateCommand { get; }
 
-    private async Task NavigateAsync()
+    private Task NavigateAsync()
+    {
+        return ShowMessageAsync();
+    }
+
+    private async Task ShowMessageAsync()
+    {
+        var result = await (await _dialogService.ShowMessageAsync("Добрый день!", "Сообщение")).WaitForResultAsync();
+    }
+
+    private async Task ShowGreetingDialogAsync()
     {
         using var scope = await _dialogService.ShowDialogAsync(
             new GreetingNavigate("Sparrow", new SendValidationRule()), 
