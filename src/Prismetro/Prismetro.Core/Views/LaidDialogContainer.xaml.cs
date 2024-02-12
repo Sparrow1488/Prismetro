@@ -2,7 +2,7 @@ using System.Windows;
 using Prism.Regions;
 using Prismetro.Core.Contracts;
 
-namespace Prismetro.Core.Views.Custom;
+namespace Prismetro.Core.Views;
 
 public partial class LaidDialogContainer : IDisposable
 {

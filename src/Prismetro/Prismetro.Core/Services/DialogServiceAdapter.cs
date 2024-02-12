@@ -33,7 +33,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         _container = container;
     }
 
-    private static DialogView<DialogContainer> DefaultDialogView => new();
+    private static DialogView<LaidDialogContainer> DefaultDialogView => new();
 
     public Task<DialogScope<TResult>> ShowDialogAsync<TResult>(Navigate<TResult> navigate)
     {
@@ -74,6 +74,9 @@ public class DialogServiceAdapter : IDialogServiceAdapter
 
         var viewModel = containerScope.Resolve<DialogContainerViewModel<TContainer>>();
         var view = containerScope.Resolve<TContainer>();
+        
+        var scope = scopeCreation.Invoke();
+        var parameters = navigate.Parameters ?? new NavigationParameters();
 
         if (view is FrameworkElement element and BaseMetroDialog dialog)
         {
@@ -86,16 +89,13 @@ public class DialogServiceAdapter : IDialogServiceAdapter
                 dialog
             );
             
-            dialogView.OnShow?.Invoke(view);
+            dialogView.OnShow?.Invoke(view, scope);
         }
         else
         {
             throw new DialogContainerException($"Passed {nameof(DialogView<TContainer>)} is not assignable to {nameof(IDialogContainerCoreSupport)} and {nameof(BaseMetroDialog)}");
         }
 
-        var scope = scopeCreation.Invoke();
-        var parameters = navigate.Parameters ?? new NavigationParameters();
-        
         AppendDefaultParameters(parameters, scope);
         
         viewModel.NavigateTo(navigate.Page, parameters, view.Core.RegionManagerScope);

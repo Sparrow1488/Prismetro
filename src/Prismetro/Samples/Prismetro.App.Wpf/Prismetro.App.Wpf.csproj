@@ -11,4 +11,8 @@
       <ProjectReference Include="..\..\Prismetro.Core\Prismetro.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    </ItemGroup>
+
 </Project>

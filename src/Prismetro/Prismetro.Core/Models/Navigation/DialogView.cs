@@ -1,5 +1,6 @@
 using System.Windows.Media;
 using Prismetro.Core.Contracts;
+using Prismetro.Core.Models.Scope;
 
 namespace Prismetro.Core.Models.Navigation;
 
@@ -10,6 +11,6 @@ namespace Prismetro.Core.Models.Navigation;
 public record DialogView<TContainer>
     where TContainer : IDialogContainerCoreSupport
 {
-    public Action<TContainer>? OnShow { get; protected set; }
+    public Action<TContainer, DialogScope>? OnShow { get; protected set; }
     public Brush? WindowDarkModeOverlayBrush { get; } = new SolidColorBrush(Colors.Black);
 }
