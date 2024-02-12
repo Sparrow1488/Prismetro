@@ -2,7 +2,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Prism.Commands;
 using Prism.Regions;
-using Prismetro.App.Wpf.Validation;
 using Prismetro.Core.Contracts;
 using Prismetro.Core.Extensions;
 using Prismetro.Core.Models.Scope;
