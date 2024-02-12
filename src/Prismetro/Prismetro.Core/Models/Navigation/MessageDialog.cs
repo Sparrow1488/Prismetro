@@ -23,12 +23,12 @@ public record MessageDialogView : DialogView<LaidDialogContainer>, IDisposable
         {
             if (scope is not DialogScope<ButtonResult> resultScope) return;
             
-            var agreement = new AgreementBottom();
+            var agreement = new Agreement();
             _agreementSub = agreement.Submit.Subscribe(res 
                 => resultScope.PushAndCloseResult(res));
 
             container.Bottom = agreement;
-            container.Header = new DialogHeader(title)
+            container.Header = new DefaultHeader(title)
             {
                 CloseCommand = new DelegateCommand(scope.RequestClose)
             };

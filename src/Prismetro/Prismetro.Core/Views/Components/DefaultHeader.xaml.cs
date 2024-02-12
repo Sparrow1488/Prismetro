@@ -4,15 +4,15 @@ using System.Windows.Input;
 
 namespace Prismetro.Core.Views.Components;
 
-public partial class DialogHeader
+public partial class DefaultHeader
 {
     public static readonly DependencyProperty CloseCommandProperty = DependencyProperty.Register(
         nameof(CloseCommand),
         typeof(ICommand),
-        typeof(DialogHeader)
+        typeof(DefaultHeader)
     );
     
-    public DialogHeader(string title, bool hideCloseButton = false, object? closeButtonContent = null) : this()
+    public DefaultHeader(string title, bool hideCloseButton = false, object? closeButtonContent = null) : this()
     {
         Title.Text = title;
         
@@ -25,7 +25,7 @@ public partial class DialogHeader
         DataContext = this;
     }
     
-    public DialogHeader()
+    public DefaultHeader()
     {
         InitializeComponent();
     }
@@ -36,13 +36,13 @@ public partial class DialogHeader
         set => SetValue(CloseCommandProperty, value);
     }
     
-    public DialogHeader SetCloseButton(Action<Button> action)
+    public DefaultHeader SetCloseButton(Action<Button> action)
     {
         Dispatcher.Invoke(() => action.Invoke(CloseButton));
         return this;
     }
 
-    public DialogHeader SetCloseButton(Func<Button, Button> action)
+    public DefaultHeader SetCloseButton(Func<Button, Button> action)
     {
         Dispatcher.Invoke(() => CloseButton = action.Invoke(CloseButton));
         return this;

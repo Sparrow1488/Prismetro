@@ -13,7 +13,7 @@ public record CustomDialog : DialogView<LaidDialogContainer>
     {
         OnShow = (container, scope) =>
         {
-            var header = new DialogHeader(
+            var header = new DefaultHeader(
                 title,
                 hideCloseButton,
                 new PackIconMicrons {Kind = PackIconMicronsKind.Hide}

@@ -3,11 +3,11 @@ using System.Windows;
 
 namespace Prismetro.Core.Views.Components;
 
-public partial class AgreementBottom : IDisposable
+public partial class Agreement : IDisposable
 {
     private readonly Subject<ButtonResult> _submit;
 
-    public AgreementBottom()
+    public Agreement()
     {
         InitializeComponent();
 
