@@ -8,9 +8,9 @@ public interface IDialogServiceAdapter
 {
     Task<DialogScope<TResult>> ShowDialogAsync<TResult>(Navigate<TResult> navigate);
     Task<DialogScope<TResult>> ShowDialogAsync<TResult, TContainer>(Navigate<TResult> navigate, DialogView<TContainer> view)
-        where TContainer : DialogContainer;
+        where TContainer : DialogContainerBase;
     
     Task<DialogScope> ShowDialogAsync(Navigate navigate);
     Task<DialogScope> ShowDialogAsync<TContainer>(Navigate navigate, DialogView<TContainer> view)
-        where TContainer : DialogContainer;
+        where TContainer : DialogContainerBase;
 }

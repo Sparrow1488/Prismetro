@@ -13,7 +13,7 @@ using Prismetro.Core.Views;
 namespace Prismetro.Core.ViewModels;
 
 public sealed class DialogContainerViewModel<TContainer> : BindableBase
-    where TContainer : DialogContainer
+    where TContainer : DialogContainerBase
 {
     private readonly IDialogCoordinator _coordinator;
     private readonly ShellWindowResolver _shellResolver;

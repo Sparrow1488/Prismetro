@@ -33,7 +33,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         _container = container;
     }
 
-    private static DialogView<DialogContainerView> DefaultDialogView => new();
+    private static DialogView<DialogContainer> DefaultDialogView => new();
 
     public Task<DialogScope<TResult>> ShowDialogAsync<TResult>(Navigate<TResult> navigate)
     {
@@ -43,7 +43,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     public async Task<DialogScope<TResult>> ShowDialogAsync<TResult, TContainer>(
         Navigate<TResult> navigate, 
         DialogView<TContainer> view
-    ) where TContainer : DialogContainer
+    ) where TContainer : DialogContainerBase
     {
         return (DialogScope<TResult>) await ShowDialogCoreAsync(navigate, CreateDialogScope<TResult>, view);
     }
@@ -56,7 +56,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
     public Task<DialogScope> ShowDialogAsync<TContainer>(
         Navigate navigate, 
         DialogView<TContainer> view
-    ) where TContainer : DialogContainer
+    ) where TContainer : DialogContainerBase
     {
         return ShowDialogCoreAsync(navigate, CreateDialogScope, view);
     }
@@ -65,7 +65,7 @@ public class DialogServiceAdapter : IDialogServiceAdapter
         Navigate navigate, 
         Func<DialogScope> scopeCreation, 
         DialogView<TContainer> dialogView
-    ) where TContainer : DialogContainer
+    ) where TContainer : DialogContainerBase
     {
         if (_shellResolver.Window is null) 
             throw new InvalidOperationException("Shell Window should be resolve");

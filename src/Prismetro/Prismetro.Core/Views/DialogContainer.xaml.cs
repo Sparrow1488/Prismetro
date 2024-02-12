@@ -3,9 +3,9 @@ using Prismetro.Core.Contracts;
 
 namespace Prismetro.Core.Views;
 
-public partial class DialogContainerView
+public partial class DialogContainer
 {
-    public DialogContainerView(IRegionManager regionManager)
+    public DialogContainer(IRegionManager regionManager)
     {
         InitializeComponent();
         CoreViewer.Content = Core = new DialogContainerCore(regionManager);
