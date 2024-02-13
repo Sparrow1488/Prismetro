@@ -1,4 +1,3 @@
-using System.Windows;
 using System.Windows.Media;
 using ControlzEx.Theming;
 using MahApps.Metro.Controls;
@@ -7,7 +6,6 @@ using Prism.Common;
 using Prism.Ioc;
 using Prism.Regions;
 using Prismetro.Core.Contracts;
-using Prismetro.Core.Exceptions;
 using Prismetro.Core.Extensions;
 using Prismetro.Core.Models.Navigation;
 using Prismetro.Core.Models.Scope;

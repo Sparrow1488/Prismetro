@@ -1,4 +1,3 @@
-using System.Windows;
 using MahApps.Metro.IconPacks;
 using Prism.Commands;
 using Prismetro.Core.Models.Navigation;
@@ -13,19 +12,14 @@ public record CustomDialog : DialogView<LaidDialogContainer>
     {
         OnShow = (container, scope) =>
         {
-            var header = new DefaultHeader(
+            container.Header = new DefaultHeader(
                 title,
                 hideCloseButton,
                 new PackIconMicrons {Kind = PackIconMicronsKind.Hide}
-            );
-
-            header.CloseCommand = new DelegateCommand(() =>
+            )
             {
-                MessageBox.Show("Close dialog by header");
-                scope.RequestClose();
-            });
-
-            container.Header = header;
+                CloseCommand = new DelegateCommand(scope.RequestClose)
+            };
         };
     }
 }

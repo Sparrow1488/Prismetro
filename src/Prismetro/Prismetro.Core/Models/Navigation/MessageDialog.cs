@@ -13,21 +13,21 @@ public record MessageDialogNavigate(string Text) : Navigate<ButtonResult>(
     new NavigationParameters().AddPair(NavigateKeys.Message.Text, Text)
 );
 
-public record MessageDialogView : DialogView<LaidDialogContainer>, IDisposable
+public record MessageDialogView : DialogView<LaidDialogContainer, ButtonResult>, IDisposable
 {
     private IDisposable? _agreementSub;
+    private Agreement? _agreement;
 
     public MessageDialogView(string title)
     {
-        OnShow += (container, scope) =>
+        OnShow = (container, scope) =>
         {
-            if (scope is not DialogScope<ButtonResult> resultScope) return;
+            if (scope is not DialogScope<ButtonResult> resultScope) throw new Exception();
             
-            var agreement = new Agreement();
-            _agreementSub = agreement.Submit.Subscribe(res 
-                => resultScope.PushAndCloseResult(res));
+            _agreement = new Agreement();
+            _agreementSub = _agreement.Submit.Subscribe(resultScope.PushAndCloseResult);
 
-            container.Bottom = agreement;
+            container.Bottom = _agreement;
             container.Header = new DefaultHeader(title)
             {
                 CloseCommand = new DelegateCommand(scope.RequestClose)
@@ -37,6 +37,7 @@ public record MessageDialogView : DialogView<LaidDialogContainer>, IDisposable
 
     public void Dispose()
     {
+        _agreement?.Dispose();
         _agreementSub?.Dispose();
     }
 }

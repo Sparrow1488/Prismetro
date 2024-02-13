@@ -14,7 +14,7 @@ public class DialogScope : IDisposable
 
     public Guid Id { get; }
     public IObservable<object?> Close => _closePublisher;
-    protected bool Disposed { get; set; }
+    protected bool Disposed { get; private set; }
 
     public void RequestClose() => _closePublisher.OnNext(new object());
 

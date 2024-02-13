@@ -26,7 +26,8 @@ public class MainWindowViewModel
 
     private Task NavigateAsync()
     {
-        return ShowMessageAsync();
+        // return ShowMessageAsync();
+        return ShowGreetingDialogAsync();
     }
 
     private async Task ShowMessageAsync()

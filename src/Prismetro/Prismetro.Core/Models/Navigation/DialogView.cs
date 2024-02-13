@@ -8,9 +8,15 @@ namespace Prismetro.Core.Models.Navigation;
 /// Настройки отображения диалогового окна
 /// </summary>
 /// <typeparam name="TContainer">Тип используемого контейнера</typeparam>
-public record DialogView<TContainer> // TODO: Dispose!!!
+public record DialogView<TContainer>
     where TContainer : IDialogContainerCoreSupport
 {
     public Action<TContainer, DialogScope>? OnShow { get; protected init; }
     public Brush? WindowDarkModeOverlayBrush { get; } = new SolidColorBrush(Colors.Black);
+}
+
+// TODO: перегрузка с TResult
+public record DialogView<TContainer, TResult> : DialogView<TContainer>
+    where TContainer : IDialogContainerCoreSupport
+{
 }
